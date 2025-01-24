@@ -14,6 +14,15 @@
             <key-map field-name="partyTypeId" related="partyTypeId"/>
         </relationship>
     </entity>
-
     
+<!--    Person Entity-->
+    <entity entity-name="Person" package="moqui.person" short-alias="person">
+        <field name="partyId" type="id" is-pk="true"/>
+        <field name="firstName" type="text-short"/>
+        <field name="lastName" type="text-short"/>
+        <field name="birthDate" type="date"/>
+        <relationship type="one" related="moqui.party.Party" fk-name="Party_Person">
+            <key-map field-name="partyId" related="partyId"/>
+        </relationship>
+    </entity>
 </entities>
