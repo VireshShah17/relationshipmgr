@@ -16,13 +16,38 @@
     <entity entity-name="ContactMech" package="moqui.contactmech">
         <field name="contactMechId" type="id" is-pk="true"/>
         <field name="contactMechTypeEnumId" type="id"/>
+        <field name="infoString" type="text-medium" not-null="false"/>
         <relationship type="one" related="moqui.contactmechtype.ContactMechType"/>
         <seed-data>
             <ContactMech contactMechId="1000" contactMechTypeEnumId="TELECOM_NUMBER"/>
-            <ContactMech contactMechId="1001" contactMechTypeEnumId="EMAIL_ADDRESS"/>
+            <ContactMech contactMechId="1001" contactMechTypeEnumId="EMAIL_ADDRESS" infoString="example@email.com"/>
             <ContactMech contactMechId="1002" contactMechTypeEnumId="POSTAL_ADDRESS"/>
             <ContactMech contactMechId="1003" contactMechTypeEnumId="POSTAL_ADDRESS"/>
             <ContactMech contactMechId="1004" contactMechTypeEnumId="POSTAL_ADDRESS"/>
         </seed-data>
     </entity>
+
+<!--    Telecom Number Detail Entity-->
+    <entity entity-name="TelecomNumber" package="moqui.telecomnumber">
+        <field name="contactMechId" type="id" is-pk="true"/>
+        <field name="countryCode" type="text-short"/>
+        <field name="areaCode" type="text-short"/>
+        <field name="contactNumber" type="text-short"/>
+        <relationship type="one" related="moqui.contactmech.ContactMech" fk-name="contactMechId"/>
+    </entity>
+
+<!--    Postal Address-->
+    <entity entity-name="PostalAddress" package="moqui.postaladdress">
+        <field name="contactMechId" type="id" is-pk="true"/>
+        <field name="toName" type="text-short"/>
+        <field name="attnName" type="text-medium"/>
+        <field name="address1" type="text-medium"/>
+        <field name="address2" type="text-medium"/>
+        <field name="city" type="text-medium"/>
+        <field name="postalCode" type="text-short"/>
+        <relationship type="one" related="moqui.contactmech.ContactMech" fk-name="contactMechId"/>
+    </entity>
+
+<!--    Contact Mech Purpose-->
+    
 </entities>
