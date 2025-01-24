@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
+<!--    ContactMech Type Entity-->
+    <entity entity-name="ContactMechType" package="moqui.contactmechtype">
+        <field name="contactMechTypeEnumId" type="id" is-pk="true"/>
+        <field name="description" type="text-medium"/>
+        <seed-data>
+            <ContactMechType contactMechTypeEnumId="TELECOM_NUMBER" description="Phone Number"/>
+            <ContactMechType contactMechTypeEnumId="EMAIL_ADDRESS" description="Email Address"/>
+            <ContactMechType contactMechTypeEnumId="POSTAL_ADDRESS" description="Post Address"/>
+        </seed-data>
+    </entity>
+
+<!--    ContactMech Entity-->
+    <entity entity-name="ContactMech" package="moqui.contactmech">
+        <field name="contactMechId" type="id" is-pk="true"/>
+        <field name="contactMechTypeEnumId" type="id"/>
+        <relationship type="one" related="moqui.contactmechtype.ContactMechType"/>
+        <seed-data>
+            <ContactMech contactMechId="1000" contactMechTypeEnumId="TELECOM_NUMBER"/>
+            <ContactMech contactMechId="1001" contactMechTypeEnumId="EMAIL_ADDRESS"/>
+            <ContactMech contactMechId="1002" contactMechTypeEnumId="POSTAL_ADDRESS"/>
+            <ContactMech contactMechId="1003" contactMechTypeEnumId="POSTAL_ADDRESS"/>
+            <ContactMech contactMechId="1004" contactMechTypeEnumId="POSTAL_ADDRESS"/>
+        </seed-data>
+    </entity>
+</entities>

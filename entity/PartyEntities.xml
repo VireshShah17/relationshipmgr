@@ -71,7 +71,7 @@
         <relationship type="one" related="moqui.partyroletype.PartyRoleType" short-alias="roleTypeId">
             <key-map field-name="roleTypeId"/>
         </relationship>
-        
+
         <seed-data>
             <PartyRole partyId="PER123" roleTypeId="CUSTOMER"/>
             <PartyRole partyId="PER123" roleTypeId="EMPLOYEE"/>
