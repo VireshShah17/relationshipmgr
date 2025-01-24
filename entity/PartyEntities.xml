@@ -4,52 +4,61 @@
     <entity entity-name="PartyType" package="moqui.partytype">
         <field name="partyTypeId" type="id" is-pk="true"/>
         <field name="description" type="text-medium"/>
+        <seed-data>
+            <PartyType partyTypeId="PERSON" description="Indiviual Person"/>
+            <PartyType partyTypeId="ORGANIZATION" description="ORG"/>
+        </seed-data>
     </entity>
 
     <!-- Party Entity -->
-    <entity entity-name="Party" package="moqui.party" short-alias="party">
+    <entity entity-name="Party" package="moqui.party">
         <field name="partyId" type="id" is-pk="true"/>
         <field name="partyTypeId" type="id"/>
-        <relationship type="many" related="moqui.partytype.PartyType" fk-name="Party_PartyType">
-            <key-map field-name="partyTypeId" related="partyTypeId"/>
-        </relationship>
+        <relationship type="one" related="moqui.partytype.PartyType" fk-name="partyTypeId"/>
+
+        <seed-data>
+            <Party partyId="PER123" partyTypeId="PERSON"/>
+            <Party partyId="ORG456" partyTypeId="ORGANIZATION"/>
+            <Party partyId="PER789" partyTypeId="PERSON"/>
+        </seed-data>
     </entity>
 
-<!--    Person Entity-->
-    <entity entity-name="Person" package="moqui.person" short-alias="person">
-        <field name="partyId" type="id" is-pk="true"/>
-        <field name="firstName" type="text-short"/>
-        <field name="lastName" type="text-short"/>
-        <field name="birthDate" type="date"/>
-        <relationship type="one" related="moqui.party.Party" fk-name="Party_Person">
-            <key-map field-name="partyId" related="partyId"/>
-        </relationship>
-    </entity>
 
-<!--    Organization entity-->
-    <entity entity-name="PartyGroup" package="moqui.partygroup" short-alias="partyGroup">
-        <field name="partyId" type="id" is-pk="true"/>
-        <field name="organizationName" type="text-short"/>
-        <relationship type="one" related="moqui.party.Party" fk-name="Party_Group">
-            <key-map field-name="partyId" related="partyId"/>
-        </relationship>
-    </entity>
+<!--    &lt;!&ndash;    Person Entity&ndash;&gt;-->
+<!--    <entity entity-name="Person" package="moqui.person" short-alias="person">-->
+<!--        <field name="partyId" type="id" is-pk="true"/>-->
+<!--        <field name="firstName" type="text-short"/>-->
+<!--        <field name="lastName" type="text-short"/>-->
+<!--        <field name="birthDate" type="date"/>-->
+<!--        <relationship type="one" related="moqui.party.Party" fk-name="Party_Person">-->
+<!--            <key-map field-name="partyId" related="partyId"/>-->
+<!--        </relationship>-->
+<!--    </entity>-->
 
-<!-- Party Role Type -->
-    <entity entity-name="PartyRoleType" package="moqui.partyroletype">
-        <field name="roleTypeId" type="id" is-pk="true"/>
-        <field name="description" type="text-medium"/>
-    </entity>
+<!--&lt;!&ndash;    Organization entity&ndash;&gt;-->
+<!--    <entity entity-name="PartyGroup" package="moqui.partygroup" short-alias="partyGroup">-->
+<!--        <field name="partyId" type="id" is-pk="true"/>-->
+<!--        <field name="organizationName" type="text-short"/>-->
+<!--        <relationship type="one" related="moqui.party.Party" short-alias="partyId">-->
+<!--            <key-map field-name="partyId" related="partyId"/>-->
+<!--        </relationship>-->
+<!--    </entity>-->
 
-<!--    Party Role-->
-    <entity entity-name="PartyRole" package="moqui.partyrole">
-        <field name="partyId" type="id" is-pk="true"/>
-        <field name="roleTypeId" type="id" is-pk="true"/>
-        <relationship type="many" related="moqui.party.Party">
-            <key-map field-name="partyId" related="partyId"/>
-        </relationship>
-        <relationship type="many" related="moqui.partyroletype.PartyRoleType">
-            <key-map field-name="roleTypeId" related="roleTypeId"/>
-        </relationship>
-    </entity>
+<!--&lt;!&ndash; Party Role Type &ndash;&gt;-->
+<!--    <entity entity-name="PartyRoleType" package="moqui.partyroletype">-->
+<!--        <field name="roleTypeId" type="id" is-pk="true"/>-->
+<!--        <field name="description" type="text-medium"/>-->
+<!--    </entity>-->
+
+<!--&lt;!&ndash;    Party Role&ndash;&gt;-->
+<!--    <entity entity-name="PartyRole" package="moqui.partyrole">-->
+<!--        <field name="partyId" type="id" is-pk="true"/>-->
+<!--        <field name="roleTypeId" type="id" is-pk="true"/>-->
+<!--        <relationship type="many" related="moqui.party.Party" short-alias="partyId">-->
+<!--            <key-map field-name="partyId"/>-->
+<!--        </relationship>-->
+<!--        <relationship type="many" related="moqui.partyroletype.PartyRoleType" short-alias="roleTypeId">-->
+<!--            <key-map field-name="roleTypeId"/>-->
+<!--        </relationship>-->
+<!--    </entity>-->
 </entities>
