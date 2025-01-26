@@ -1,4 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
-    
+<!--    Creating the party entities-->
+    <entity entity-name="Party" package="relationshipmgr.party">
+        <field name="partyId" type="id" is-pk="true"/>
+        <field name="partyTypeEnumId" type="id"/>
+        <relationship type="one" related="moqui.basic.Enumeration" title="PartyType" short-alias="type">
+            <key-map field-name="partyTypeEnumId"/>
+        </relationship>
+        <relationship type="one-nofk" related="relationshipmgr.person.Person" short-alias="person" mutable="true"/>
+        <relationship type="one-nofk" related="relationshipmgr.organization.Organization" short-alias="organization"
+                      mutable="true"/>
+        <relationship type="many" related="relationshipmgr.partyrole.PartyRole" short-alias="roles">
+            <key-map field-name="partyId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Party Type" enumTypeId="PartyType"/>
+            <moqui.basic.Enumeration description="Person" enumId="PtyPerson" enumTypeId="PartyType"/>
+            <moqui.basic.Enumeration description="Organization" enumId="PtyOrganization" enumTypeId="PartyType"/>
+
+            <relationshipmgr.party.Party partyId="PER123" partyTypeEnumId="PtyPerson"/>
+            <relationshipmgr.party.Party partyId="ORG456" partyTypeEnumId="PtyOrganization"/>
+        </seed-data>
+        
+        <master name="default">
+            <detail relationship="type"/>
+            <detail relationship="person"/>
+            <detail relationship="organization"/>
+            <detail relationship="roles"/>
+        </master>
+    </entity>
+
+<!--    Creating the person entities-->
+    <entity entity-name="Person" package="relationshipmgr.person">
+        <field name="partyId" type="id" is-pk="true"/>
+        <field name="firstName" type="text-medium"/>
+        <field name="lastName" type="text-medium"/>
+        <field name="birthDate" type="date"/>
+        <relationship type="one" related="relationshipmgr.party.Party"/>
+
+        <seed-data>
+            <relationshipmgr.person.Person partyId="PER123" firstName="John" lastName="Doe" birthDate="1990-01-01"/>
+        </seed-data>
+    </entity>
+
+<!--    Creating the organization entity-->
+    <entity entity-name="Organization" package="relationshipmgr.organization">
+        <field name="partyId" type="id" is-pk="true"/>
+        <field name="organizationName" type="text-medium"/>
+        <relationship type="one" related="relationshipmgr.party.Party"/>
+
+        <seed-data>
+            <relationshipmgr.organization.Organization partyId="ORG456" organizationName="ABC"/>
+        </seed-data>
+    </entity>
+
+<!--    Creating Party Role-->
+    <entity entity-name="PartyRole" package="relationshipmgr.partyrole">
+        <field name="partyId" type="id" is-pk="true"/>
+        <field name="roleTypeEnumId" type="id" is-pk="true"/>
+        <relationship type="one" related="relationshipmgr.party.Party"/>
+        <relationship type="one" related="moqui.basic.Enumeration" title="RoleType">
+            <key-map field-name="roleTypeEnumId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Role Type" enumTypeId="RoleType"/>
+            <moqui.basic.Enumeration description="CUSTOMER" enumId="RtyCustomer" enumTypeId="RoleType"/>
+            <moqui.basic.Enumeration description="EMPLOYEE" enumId="RtyEmployee" enumTypeId="RoleType"/>
+            <moqui.basic.Enumeration description="EMPLOYER" enumId="RtyEmployer" enumTypeId="RoleType"/>
+
+            <relationshipmgr.partyrole.PartyRole partyId="PER123" roleTypeEnumId="RtyCustomer"/>
+            <relationshipmgr.partyrole.PartyRole partyId="PER123" roleTypeEnumId="RtyEmployee"/>
+            <relationshipmgr.partyrole.PartyRole partyId="ORG456" roleTypeEnumId="RtyEmployer"/>
+        </seed-data>
+    </entity>
 </entities>
