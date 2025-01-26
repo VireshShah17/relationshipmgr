@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchema="http://moqui.org/xsd/service-definition-3.xsd">
+    <service verb="create" noun="Party" type="entity-auto">
+        <in-parameters>
+            <auto-parameters include="all"/>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters include="all"/>
+        </out-parameters>
+    </service>
+
+    <service verb="fetch" type="entity-auto" noun="Party">
+        <in-parameters>
+            <auto-parameters include="pk" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters include="all"/>
+        </out-parameters>
+    </service>
+</services>

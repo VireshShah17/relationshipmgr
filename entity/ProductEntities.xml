@@ -1,0 +1,51 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--          xsi:noNamespaceSchema="http://moqui.org/xsd/entity-definition-3.xsd">-->
+<!--    <entity entity-name="Product" package="moqui.product" short-alias="product">-->
+<!--        <field name="productId" type="id" is-pk="true"/>-->
+<!--        <field name="productName" type="text-short"/>-->
+<!--        <field name="productTypeEnumId" type="id"/>-->
+<!--        <field name="isVirtual" type="text-short"/>-->
+<!--        <field name="isVarient" type="text-short"/>-->
+<!--        <field name="fromDate" type="date"/>-->
+
+<!--        <relationship type="one" related="moqui.basic.Enumeration" short-alias="type">-->
+<!--            <key-map field-name="productTypeEnumId"/>-->
+<!--        </relationship>-->
+<!--        <relationship type="many" related="moqui.productcontent.ProductContent" short-alias="productcontent"/>-->
+
+<!--        <seed-data>-->
+<!--            <moqui.basic.EnumerationType description="Product Type" enumTypeId="ProductType"/>-->
+<!--            <moqui.basic.Enumeration description="FINISHED_GOOD" enumId="Ptfinishedgood" enumTypeId="ProductType"/>-->
+
+<!--            <moqui.product.Product productid="PROD10000" productName="SmartPhone"  productTypeEnumId="Ptfinishedgood"-->
+<!--                                   isVirtual="Y" isVarient="N"/>-->
+<!--            <moqui.product.Product productid="PROD10001" productName="SmartPhone-128GB"-->
+<!--                                   productTypeEnumId="Ptfinishedgood"-->
+<!--                                   isVirtual="N" isVarient="Y"/>-->
+<!--            <moqui.product.Product productid="PROD10002" productName="SmartPhone-256GB"-->
+<!--                                   productTypeEnumId="Ptfinishedgood"-->
+<!--                                   isVirtual="N" isVarient="Y"/>-->
+<!--            <moqui.product.Product productid="PROD20000" productName="Laptop"  productTypeEnumId="Ptfinishedgood"-->
+<!--                                   isVirtual="Y" isVarient="N" fromDate="2023-09-01"/>-->
+<!--            <moqui.product.Product productid="PROD10000" productName="Laptop-BLACK"  productTypeEnumId="Ptfinishedgood"-->
+<!--                                   isVirtual="N" isVarient="Y"/>-->
+<!--            <moqui.product.Product productid="PROD10000" productName="Laptop-Phone-Promotional-Package"  productTypeEnumId="Ptfinishedgood"-->
+<!--                                   isVirtual="N" isVarient="Y"/>-->
+<!--        </seed-data>-->
+<!--    </entity>-->
+
+<!--    <entity entity-name="ProductContent" package="moqui.productcontent" short-alias="productcontent">-->
+<!--        <field name="productContentId" type="id" is-pk="true"/>-->
+<!--        <field name="productId" type="id"/>-->
+<!--        <field name="productContentTypeEnumId" type="id"/>-->
+<!--        <field name="contentLocation" type="text-medium"/>-->
+<!--        <relationship type="one" related="moqui.basic.Enumeration" short-alias="type">-->
+<!--            <key-map field-name="productContentTypeEnumId"/>-->
+<!--        </relationship>-->
+<!--        <relationship type="one" related="moqui.product.Product" short-alias="product"/>-->
+<!--        <seed-data>-->
+
+<!--        </seed-data>-->
+<!--    </entity>-->
+<!--</entities>-->

@@ -1,91 +1,92 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
-<!--    ContactMech Type Entity-->
-    <entity entity-name="ContactMechType" package="moqui.contactmechtype">
-        <field name="contactMechTypeEnumId" type="id" is-pk="true"/>
-        <field name="description" type="text-medium"/>
-        <seed-data>
-            <ContactMechType contactMechTypeEnumId="TELECOM_NUMBER" description="Phone Number"/>
-            <ContactMechType contactMechTypeEnumId="EMAIL_ADDRESS" description="Email Address"/>
-            <ContactMechType contactMechTypeEnumId="POSTAL_ADDRESS" description="Post Address"/>
-        </seed-data>
-    </entity>
-
-<!--    ContactMech Entity-->
-    <entity entity-name="ContactMech" package="moqui.contactmech">
-        <field name="contactMechId" type="id" is-pk="true"/>
-        <field name="contactMechTypeEnumId" type="id"/>
-        <field name="infoString" type="text-medium" not-null="false"/>
-        <relationship type="one" related="moqui.contactmechtype.ContactMechType"/>
-        <seed-data>
-            <ContactMech contactMechId="1000" contactMechTypeEnumId="TELECOM_NUMBER"/>
-            <ContactMech contactMechId="1001" contactMechTypeEnumId="EMAIL_ADDRESS" infoString="example@email.com"/>
-            <ContactMech contactMechId="1002" contactMechTypeEnumId="POSTAL_ADDRESS"/>
-            <ContactMech contactMechId="1003" contactMechTypeEnumId="POSTAL_ADDRESS"/>
-            <ContactMech contactMechId="1004" contactMechTypeEnumId="POSTAL_ADDRESS"/>
-        </seed-data>
-    </entity>
-
-<!--    Telecom Number Detail Entity-->
-    <entity entity-name="TelecomNumber" package="moqui.telecomnumber">
-        <field name="contactMechId" type="id" is-pk="true"/>
-        <field name="countryCode" type="text-short"/>
-        <field name="areaCode" type="text-short"/>
-        <field name="contactNumber" type="text-short"/>
-        <relationship type="one" related="moqui.contactmech.ContactMech" fk-name="contactMechId"/>
-        <seed-data>
-            <TelecomNumber contactMechId="1000" countryCode="1" areaCode="123" contactNumber="4567890"/>
-        </seed-data>
-    </entity>
-
-<!--    Postal Address-->
-    <entity entity-name="PostalAddress" package="moqui.postaladdress">
-        <field name="contactMechId" type="id" is-pk="true"/>
-        <field name="toName" type="text-short"/>
-        <field name="attnName" type="text-medium"/>
-        <field name="address1" type="text-medium"/>
-        <field name="address2" type="text-medium"/>
-        <field name="city" type="text-medium"/>
-        <field name="postalCode" type="text-short"/>
-        <relationship type="one" related="moqui.contactmech.ContactMech" fk-name="contactMechId"/>
-        <seed-data>
-            <PostalAddress contactMechId="1002" toName="John Doe" attnName="Office" address1="123 Main St"
-                           address2="Suite 100" city="Metropolis" postalCode="12345"/>
-            <PostalAddress contactMechId="1003" toName="John Doe" attnName="Home" address1="123 Local St"
-                            city="Metropolis" postalCode="12345"/>
-            <PostalAddress contactMechId="1004" toName="SoHo Store" attnName="Home" address1="123 Broome St"
-                           city="New York" postalCode="10012"/>
-        </seed-data>
-    </entity>
-
-<!--    Contact Mech Purpose-->
-    <entity entity-name="ContactMechPurpose" package="moqui.contactmechpurpose">
-        <field name="contactMechPurposeId" type="id" is-pk="true"/>
-        <seed-data>
-            <ContactMechPurpose contactMechPurposeId="WORK"/>
-            <ContactMechPurpose contactMechPurposeId="HOME"/>
-            <ContactMechPurpose contactMechPurposeId="OFFICE"/>
-        </seed-data>
-    </entity>
-
-<!--    Party Contact Mech-->
-    <entity entity-name="PartyContactMech" package="moqui.partycontactmech">
-        <field name="partyId" type="id" is-pk="true"/>
-        <field name="contactMechId" type="id" is-pk="true"/>
-        <field name="contactMechPurposeId" type="id" is-pk="true"/>
-        <field name="fromDate" type="date"/>
-        <relationship type="one" related="moqui.party.Party" fk-name="partyId">
-            <key-map field-name="partyId"/>
-        </relationship>
-        <relationship type="one" related="moqui.contactmech.ContactMech" fk-name="contactMechId">
-            <key-map field-name="contactMechId"/>
-        </relationship>
-        <relationship type="one" related="moqui.contactmechpurpose" fk-name="ContactMechPurpose">
-            <key-map field-name="contactMechPurposeId"/>
-        </relationship>
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">-->
+<!--&lt;!&ndash;    ContactMech Type Entity&ndash;&gt;-->
+<!--    <entity entity-name="ContactMechType" package="moqui.contactmechtype">-->
+<!--        <field name="contactMechTypeEnumId" type="id" is-pk="true"/>-->
+<!--        <field name="description" type="text-medium"/>-->
 <!--        <seed-data>-->
-<!--            <PartyContactMech partyId="PER123" contactMechId="10000" contactMechPurposeId="WORK" fromDate="2010-01-01"/>-->
+<!--            <ContactMechType contactMechTypeEnumId="TELECOM_NUMBER" description="Phone Number"/>-->
+<!--            <ContactMechType contactMechTypeEnumId="EMAIL_ADDRESS" description="Email Address"/>-->
+<!--            <ContactMechType contactMechTypeEnumId="POSTAL_ADDRESS" description="Post Address"/>-->
+<!--        </seed-data>-->
+<!--    </entity>-->
+
+<!--&lt;!&ndash;    ContactMech Entity&ndash;&gt;-->
+<!--    <entity entity-name="ContactMech" package="moqui.contactmech">-->
+<!--        <field name="contactMechId" type="id" is-pk="true"/>-->
+<!--        <field name="contactMechTypeEnumId" type="id"/>-->
+<!--        <field name="infoString" type="text-medium" not-null="false"/>-->
+<!--        <relationship type="one" related="moqui.contactmechtype.ContactMechType"/>-->
+<!--        <seed-data>-->
+<!--            <ContactMech contactMechId="1000" contactMechTypeEnumId="TELECOM_NUMBER"/>-->
+<!--            <ContactMech contactMechId="1001" contactMechTypeEnumId="EMAIL_ADDRESS" infoString="example@email.com"/>-->
+<!--            <ContactMech contactMechId="1002" contactMechTypeEnumId="POSTAL_ADDRESS"/>-->
+<!--            <ContactMech contactMechId="1003" contactMechTypeEnumId="POSTAL_ADDRESS"/>-->
+<!--            <ContactMech contactMechId="1004" contactMechTypeEnumId="POSTAL_ADDRESS"/>-->
+<!--        </seed-data>-->
+<!--    </entity>-->
+
+<!--&lt;!&ndash;    Telecom Number Detail Entity&ndash;&gt;-->
+<!--    <entity entity-name="TelecomNumber" package="moqui.telecomnumber">-->
+<!--        <field name="contactMechId" type="id" is-pk="true"/>-->
+<!--        <field name="countryCode" type="text-short"/>-->
+<!--        <field name="areaCode" type="text-short"/>-->
+<!--        <field name="contactNumber" type="text-short"/>-->
+<!--        <relationship type="one" related="moqui.contactmech.ContactMech" fk-name="contactMechId"/>-->
+<!--        <seed-data>-->
+<!--            <TelecomNumber contactMechId="1000" countryCode="1" areaCode="123" contactNumber="4567890"/>-->
+<!--        </seed-data>-->
+<!--    </entity>-->
+
+<!--&lt;!&ndash;    Postal Address&ndash;&gt;-->
+<!--    <entity entity-name="PostalAddress" package="moqui.postaladdress">-->
+<!--        <field name="contactMechId" type="id" is-pk="true"/>-->
+<!--        <field name="toName" type="text-short"/>-->
+<!--        <field name="attnName" type="text-medium"/>-->
+<!--        <field name="address1" type="text-medium"/>-->
+<!--        <field name="address2" type="text-medium"/>-->
+<!--        <field name="city" type="text-medium"/>-->
+<!--        <field name="postalCode" type="text-short"/>-->
+<!--        <relationship type="one" related="moqui.contactmech.ContactMech" fk-name="contactMechId"/>-->
+<!--        <seed-data>-->
+<!--            <PostalAddress contactMechId="1002" toName="John Doe" attnName="Office" address1="123 Main St"-->
+<!--                           address2="Suite 100" city="Metropolis" postalCode="12345"/>-->
+<!--            <PostalAddress contactMechId="1003" toName="John Doe" attnName="Home" address1="123 Local St"-->
+<!--                            city="Metropolis" postalCode="12345"/>-->
+<!--            <PostalAddress contactMechId="1004" toName="SoHo Store" attnName="Home" address1="123 Broome St"-->
+<!--                           city="New York" postalCode="10012"/>-->
+<!--        </seed-data>-->
+<!--    </entity>-->
+
+<!--&lt;!&ndash;    Contact Mech Purpose&ndash;&gt;-->
+<!--    <entity entity-name="ContactMechPurpose" package="moqui.contactmechpurpose">-->
+<!--        <field name="contactMechPurposeId" type="id" is-pk="true"/>-->
+<!--        <seed-data>-->
+<!--            <ContactMechPurpose contactMechPurposeId="WORK"/>-->
+<!--            <ContactMechPurpose contactMechPurposeId="HOME"/>-->
+<!--            <ContactMechPurpose contactMechPurposeId="OFFICE"/>-->
+<!--        </seed-data>-->
+<!--    </entity>-->
+
+<!--&lt;!&ndash;    Party Contact Mech&ndash;&gt;-->
+<!--    <entity entity-name="PartyContactMech" package="moqui.partycontactmech">-->
+<!--        <field name="partyId" type="id" is-pk="true"/>-->
+<!--        <field name="contactMechId" type="id" is-pk="true"/>-->
+<!--        <field name="contactMechPurposeId" type="id" is-pk="true"/>-->
+<!--        <field name="fromDate" type="date"/>-->
+<!--        <relationship type="one" related="moqui.party.Party" fk-name="partyId">-->
+<!--            <key-map field-name="partyId"/>-->
+<!--        </relationship>-->
+<!--        <relationship type="one" related="moqui.contactmech.ContactMech" fk-name="contactMechId">-->
+<!--            <key-map field-name="contactMechId"/>-->
+<!--        </relationship>-->
+<!--        <relationship type="one" related="moqui.contactmechpurpose.ContactMechPurpose" fk-name="ContactMechPurpose">-->
+<!--            <key-map field-name="contactMechPurposeId"/>-->
+<!--        </relationship>-->
+<!--        <seed-data>-->
+<!--            <PartyContactMech partyId="PER123" contactMechId="10000" contactMechPurposeId="WORK"-->
+<!--            fromDate="2010-01-01"/>-->
 <!--            <PartyContactMech partyId="PER123" contactMechId="10001" contactMechPurposeId="WORK" fromDate="2010-01-01"/>-->
 <!--            <PartyContactMech partyId="PER123" contactMechId="10002" contactMechPurposeId="WORK" fromDate="2010-01-01"/>-->
 <!--            <PartyContactMech partyId="PER123" contactMechId="10003" contactMechPurposeId="HOME" fromDate="2005-01-01"/>-->
@@ -93,5 +94,5 @@
 <!--            <PartyContactMech partyId="ORG456" contactMechId="10002" contactMechPurposeId="OFFICE" fromDate="2000-01-01"/>-->
 <!--        </seed-data>-->
 
-    </entity>
-</entities>
+<!--    </entity>-->
+<!--</entities>-->
