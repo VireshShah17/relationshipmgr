@@ -75,4 +75,31 @@
             <relationshipmgr.partyrole.PartyRole partyId="ORG456" roleTypeEnumId="RtyEmployer"/>
         </seed-data>
     </entity>
+
+<!--    Creating a contact Mech entity-->
+    <entity entity-name="ContactMech" package="relationshipmgr.contactmech">
+        <field name="contactMechId" type="id" is-pk="true"/>
+        <field name="contactMechTypeEnumId" type="id"/>
+        <field name="infoString" type="text-medium"/>
+        <relationship type="one" related="moqui.basic.Enumeration" title="ContactMechType" short-alias="type">
+            <key-map field-name="contactMechTypeEnumId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Contact Mech Type" enumTypeId="ContactMechType"/>
+            <moqui.basic.Enumeration description="Telecom Number" enumId="ctyTelecomNumber"
+                                     enumTypeId="ContactMechType"/>
+            <moqui.basic.Enumeration description="Postal Address" enumId="ctyPostalAddress"
+                                     enumTypeId="ContactMechType"/>
+            <moqui.basic.Enumeration description="Email Address" enumId="ctyEmailAddress"
+                                     enumTypeId="ContactMechType"/>
+
+            <relationshipmgr.contactmech.ContactMech contactMechId="10000" contactMechTypeEnumId="ctyTelecomNumber"/>
+            <relationshipmgr.contactmech.ContactMech contactMechId="10001" contactMechTypeEnumId="ctyEmailAddress"
+                                                     infoString="example@email.com"/>
+            <relationshipmgr.contactmech.ContactMech contactMechId="10002" contactMechTypeEnumId="ctyPostalAddress"/>
+            <relationshipmgr.contactmech.ContactMech contactMechId="10003" contactMechTypeEnumId="ctyPostalAddress"/>
+            <relationshipmgr.contactmech.ContactMech contactMechId="10004" contactMechTypeEnumId="ctyPostalAddress"/>
+        </seed-data>
+    </entity>
 </entities>
