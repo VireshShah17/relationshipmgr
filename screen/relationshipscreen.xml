@@ -12,6 +12,10 @@
         <service-call name="relationshipmgr.party.PartyService.create#Person"/>
         <default-response type="none"/>
     </transition>
+    <transition name="createOrg">
+        <service-call name="relationshipmgr.party.PartyService.create#Organization"/>
+        <default-response type="none"/>
+    </transition>
 
     <actions>
         <entity-find entity-name="relationshipmgr.party.Party" list="PartyList">
@@ -83,7 +87,7 @@
                         <default-field>
                             <drop-down allow-empty="true" style="">
                                 <entity-options>
-                                    <entity-find entity-name="relationshipmgr.party.Party" offset="0" limit="200"/>
+                                    <entity-find entity-name="relationshipmgr.party.Party"/>
                                 </entity-options>
                             </drop-down>
                         </default-field>
@@ -111,5 +115,34 @@
                 </form-single>
             </box-body-nopad>
         </container-box>
+
+<!--        Widget to create organization -->
+        <container-box>
+            <box-header title="Create Organization"/>
+            <box-body-nopad>
+                <form-single name="CreateOrganization" transition="createOrg">
+                    <field name="partyId">
+                        <default-field>
+                            <drop-down allow-empty="true" style="">
+                                <entity-options>
+                                    <entity-find entity-name="relationshipmgr.party.Party"/>
+                                </entity-options>
+                            </drop-down>
+                        </default-field>
+                    </field>
+                    <field name="organizationName">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="createOrgButton">
+                        <default-field title="CreateOrg">
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-single>
+            </box-body-nopad>
+        </container-box>
+
     </widgets>
 </screen>
