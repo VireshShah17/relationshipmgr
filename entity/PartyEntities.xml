@@ -85,6 +85,7 @@
             <key-map field-name="contactMechTypeEnumId"/>
         </relationship>
         <relationship type="one-nofk" related="relationshipmgr.telecom.TelecomNumber" title="Telecom"/>
+        <relationship type="one-nofk" related="relationshipmgr.postaladdress.PostalAddress" title="PostalAddress"/>
 
         <seed-data>
             <moqui.basic.EnumerationType description="Contact Mech Type" enumTypeId="ContactMechType"/>
@@ -105,6 +106,7 @@
 
         <master name="default">
             <detail relationship="Telecom"/>
+            <detail relationship="PostalAddress"/>
         </master>
     </entity>
 
@@ -118,6 +120,29 @@
         <seed-data>
             <relationshipmgr.telecom.TelecomNumber contactMechId="10000" countryCode="1" areaCode="123"
                                                   contactNumber="4567890"/>
+        </seed-data>
+    </entity>
+
+    <entity entity-name="PostalAddress" package="relationshipmgr.postaladdress">
+        <field name="contactMechId" type="id" is-pk="true"/>
+        <field name="toName" type="text-short"/>
+        <field name="attnName" type="text-short"/>
+        <field name="address1" type="text-medium"/>
+        <field name="address2" type="text-medium"/>
+        <field name="city" type="text-short"/>
+        <field name="postal" type="text-short"/>
+        <relationship type="one" related="relationshipmgr.contactmech.ContactMech"/>
+
+        <seed-data>
+            <relationshipmgr.postaladdress.PostalAddress contactMechId="10002" toName="John Doe" attnName="Office"
+                                                         address1="123 Main St" address2="Suite 100"
+                                                         city="Metropolis" postal="12345"/>
+            <relationshipmgr.postaladdress.PostalAddress contactMechId="10003" toName="John Doe" attnName="Home"
+                                                         address1="123 Local St"
+                                                         city="Metropolis" postal="12345"/>
+            <relationshipmgr.postaladdress.PostalAddress contactMechId="10004" toName="SoHo Store" attnName="Home"
+                                                         address1="123 Broome St"
+                                                         city="New York" postal="10012"/>
         </seed-data>
     </entity>
 </entities>
