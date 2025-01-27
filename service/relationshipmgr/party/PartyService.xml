@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-3.0.xsd">
+
+    <service verb="create" noun="Party" type="entity-auto">
+        <in-parameters>
+            <auto-parameters include="all" />
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters include="all" required="true"/>
+        </out-parameters>
+    </service>
+
+<!--    <service verb="fetch" noun="Party">-->
+<!--        <in-parameters>-->
+<!--            <parameter name="partyId" entity-name="relationshipmgr.party.Party"/>-->
+<!--            <parameter name="partyTypeEnumId" entity-name="relationshipmgr.party.Party"/>-->
+<!--        </in-parameters>-->
+<!--        <out-parameters>-->
+<!--            <parameter name="partyList" required="true"/>-->
+<!--        </out-parameters>-->
+<!--        <actions>-->
+<!--            <log message="&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;${context.partyId}-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"/>-->
+<!--            <entity-find entity-name="relationshipmgr.party.Party" list="partyList">-->
+<!--                <econdition field-name="partyId"  ignore-if-empty="true"/>-->
+<!--                <econdition field-name="partyTypeEnumId"  ignore-if-empty="true"/>-->
+<!--            </entity-find>-->
+<!--            <log message="${context}"/>-->
+<!--        </actions>-->
+<!--    </service>-->
+
+    <service verb="create" noun="Person" type="entity-auto">
+        <in-parameters>
+            <auto-parameters include="all"/>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters include="all"/>
+        </out-parameters>
+    </service>
+</services>
