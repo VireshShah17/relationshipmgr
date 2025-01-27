@@ -46,4 +46,13 @@
             <auto-parameters include="all"/>
         </out-parameters>
     </service>
+
+    <service verb="create" noun="PartyRole" type="entity-auto">
+        <in-parameters>
+            <auto-parameters include="all"/>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters include="pk"/>
+        </out-parameters>
+    </service>
 </services>
