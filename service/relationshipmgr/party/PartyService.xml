@@ -29,14 +29,14 @@
 <!--        </actions>-->
 <!--    </service>-->
 
-    <service verb="create" noun="Person" type="entity-auto">
-        <in-parameters>
-            <auto-parameters include="all"/>
-        </in-parameters>
-        <out-parameters>
-            <auto-parameters include="all"/>
-        </out-parameters>
-    </service>
+<!--    <service verb="create" noun="Person" type="entity-auto">-->
+<!--        <in-parameters>-->
+<!--            <auto-parameters include="all"/>-->
+<!--        </in-parameters>-->
+<!--        <out-parameters>-->
+<!--            <auto-parameters include="all"/>-->
+<!--        </out-parameters>-->
+<!--    </service>-->
 
     <service verb="create" noun="Organization" type="entity-auto">
         <in-parameters>

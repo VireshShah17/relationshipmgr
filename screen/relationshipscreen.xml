@@ -5,19 +5,19 @@
 
 
     <transition name="createParty">
-        <service-call name="relationshipmgr.party.PartyService.create#Party"/>
+        <service-call name="create#relationshipmgr.party.Party"/>
         <default-response type="none"/>
     </transition>
     <transition name="createPerson">
-        <service-call name="relationshipmgr.party.PartyService.create#Person"/>
+        <service-call name="create#relationshipmgr.party.Person"/>
         <default-response type="none"/>
     </transition>
     <transition name="createOrg">
-        <service-call name="relationshipmgr.party.PartyService.create#Organization"/>
+        <service-call name="create#relationshipmgr.party.Organization"/>
         <default-response type="none"/>
     </transition>
     <transition name="createPartyRole">
-        <service-call name="relationshipmgr.party.PartyService.create#PartyRole"/>
+        <service-call name="create#relationshipmgr.party.PartyRole"/>
         <default-response type="none"/>
     </transition>
 
