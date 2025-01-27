@@ -174,7 +174,7 @@
                             </drop-down>
                         </default-field>
                     </field>
-                    <field name="CreatePartyRoleButton">
+                    <field name="createPartyRoleButton">
                         <default-field title="Create Role">
                             <submit/>
                         </default-field>

@@ -84,6 +84,7 @@
         <relationship type="one" related="moqui.basic.Enumeration" title="ContactMechType" short-alias="type">
             <key-map field-name="contactMechTypeEnumId"/>
         </relationship>
+        <relationship type="one-nofk" related="relationshipmgr.telecom.TelecomNumber" title="Telecom"/>
 
         <seed-data>
             <moqui.basic.EnumerationType description="Contact Mech Type" enumTypeId="ContactMechType"/>
@@ -100,6 +101,23 @@
             <relationshipmgr.contactmech.ContactMech contactMechId="10002" contactMechTypeEnumId="ctyPostalAddress"/>
             <relationshipmgr.contactmech.ContactMech contactMechId="10003" contactMechTypeEnumId="ctyPostalAddress"/>
             <relationshipmgr.contactmech.ContactMech contactMechId="10004" contactMechTypeEnumId="ctyPostalAddress"/>
+        </seed-data>
+
+        <master name="default">
+            <detail relationship="Telecom"/>
+        </master>
+    </entity>
+
+    <entity entity-name="TelecomNumber" package="relationshipmgr.telecom">
+        <field name="contactMechId" type="id" is-pk="true"/>
+        <field name="countryCode" type="text-short"/>
+        <field name="areaCode" type="text-short"/>
+        <field name="contactNumber" type="text-medium"/>
+        <relationship type="one" related="relationshipmgr.contactmech.ContactMech" />
+
+        <seed-data>
+            <relationshipmgr.telecom.TelecomNumber contactMechId="10000" countryCode="1" areaCode="123"
+                                                  contactNumber="4567890"/>
         </seed-data>
     </entity>
 </entities>
